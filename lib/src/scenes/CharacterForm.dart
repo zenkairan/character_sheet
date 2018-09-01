@@ -62,17 +62,17 @@ void initState(){
   _sheet = new SheetSingleton();
   if(_sheet.character != null){
     _character = _sheet.character;
-    _selectedClass = _character.getClasse().index;
-    _selectedRace = _character.getRace().index;
-    _selectedAlinhamento = _character.getAlinhamento().index;
+    _selectedClass = _character.classe.index;
+    _selectedRace = _character.race.index;
+    _selectedAlinhamento = _character.alinhamento.index;
   }else{
     _character = new Character();
     _selectedClass = Classes.values.first.index;
-    _character.setClasse(Classes.values.first);
+    _character.classe = (Classes.values.first);
     _selectedRace = Races.values.first.index;
-    _character.setRace(Races.values.first);
+    _character.race = (Races.values.first);
     _selectedAlinhamento = Alinhamento.values.first.index;
-    _character.setAlinhamento(Alinhamento.values.first);
+    _character.alinhamento = (Alinhamento.values.first);
   }
   // readCharacter().then((String value){
   //     if(value == null){
@@ -94,7 +94,7 @@ void initState(){
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             TextFormField(
-              initialValue: _character != null? _character.getNome(): '',
+              initialValue: _character != null? _character.name: '',
               decoration: InputDecoration(
                 labelText: 'Nome'
               ),
@@ -102,7 +102,7 @@ void initState(){
                 if(value.isEmpty)
                   return 'nome é obrigatório';
               },
-              onSaved: (value) => _character.setName(value),
+              onSaved: (value) => _character.name = value,
             ),
             DropdownButton(
               hint: Text('Classe'),
@@ -114,7 +114,7 @@ void initState(){
               }).toList(),
               value: _selectedClass,
               onChanged: (value){
-                _character.setClasse(Classes.values[value]);
+                _character.classe = (Classes.values[value]);
                 setState(() {
                   _selectedClass = value;  
                 });
@@ -130,7 +130,7 @@ void initState(){
               }).toList(),
               value: _selectedRace,
               onChanged: (value) {
-                _character.setRace(Races.values[value]);
+                _character.race = (Races.values[value]);
                 setState(() {
                   _selectedRace = value;
                 });
@@ -146,14 +146,14 @@ void initState(){
               }).toList(),
               value: _selectedAlinhamento,
               onChanged: (value) {
-                _character.setAlinhamento(Alinhamento.values[value]);
+                _character.alinhamento = (Alinhamento.values[value]);
                 setState(() {
                   _selectedAlinhamento = value;
                 });
               },
             ),
             TextFormField(
-              initialValue: _character != null? _character.getXp().toString(): '',
+              initialValue: _character != null? _character.xp.toString(): '',
               decoration: InputDecoration(labelText: 'Exp.'),
               keyboardType: TextInputType.numberWithOptions(decimal: false, signed: false),
               validator: (value){
@@ -166,7 +166,7 @@ void initState(){
                 }
                 return null;
               },
-              onSaved: (value) => _character.setXp(int.parse(value)),
+              onSaved: (value) => _character.xp = (int.parse(value)),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),

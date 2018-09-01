@@ -55,71 +55,43 @@ enum Alinhamento{
 }
 
 class Character{
-  String _name;
-  Classes _classe;
+  String name;
+  Classes classe;
   int _level;
-  Races _race;
+  Races race;
   int _xp;
-  Alinhamento _alinhamento;
+  Alinhamento alinhamento;
 
   Character();
 
   Character.fromJson(Map<String, dynamic> json)
-  :_name = json['name'],
-  _classe = Classes.values[json['classe']] ,
-  _race = Races.values[json['race']],
+  :name = json['name'],
+  classe = Classes.values[json['classe']] ,
+  race = Races.values[json['race']],
   _xp = json['xp'],
-  _alinhamento = Alinhamento.values[json['alinhamento']];
+  alinhamento = Alinhamento.values[json['alinhamento']];
 
   Map<String, dynamic> toJson() =>
   {
-    'name': _name,
-    'classe':_classe.index,
-    'race':_race.index,
+    'name': name,
+    'classe':classe.index,
+    'race':race.index,
     'xp':_xp,
-    'alinhamento':_alinhamento.index
+    'alinhamento':alinhamento.index
   };
 
   //get set
-  void setName(String value){
-    _name = value;
-  }
-  void setClasse(Classes value){
-    _classe = value;
-  }
-  void setRace(Races value){
-    _race = value;
-  }
-  void setXp(int value){
+  set xp(int value){
     _xp = value;
     _setLevel();
   }
-  void setAlinhamento(Alinhamento value){
-    _alinhamento = value;
-  }
-  
-  String getNome(){
-    return _name;
-  }
-  Classes getClasse(){
-    return _classe;
-  }
-  int getLevel(){
+  get xp => _xp;
+  get level{
     if(_level == null && _xp != null){
       _setLevel();
     }
     return _level == null? 0: _level;
   }
-  Races getRace(){
-    return _race;
-  }
-  int getXp(){
-    return _xp;
-  }
-  Alinhamento getAlinhamento(){
-    return _alinhamento;
-  }
-
 
   void _setLevel(){
     int exp = _xp;
@@ -205,7 +177,7 @@ class Character{
   @override
     String toString() {
       // TODO: implement toString
-      return 'this is '+ _name;
+      return 'this is '+ name;
     }
 
 }

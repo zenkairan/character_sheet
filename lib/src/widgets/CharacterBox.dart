@@ -30,15 +30,15 @@ class CharacterBoxState extends State<CharacterBox>{
               Expanded(
                 child: Column(
                         children: <Widget>[
-                          Text(character.getNome(),
+                          Text(character.name,
                             textAlign: TextAlign.center,
                             style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),
                           ),
-                          Text('Level: ' + character.getLevel().toString()),
-                          Text('Classe: ' + character.getClasse().toString().substring(8)),
-                          Text('Raça: ' + character.getRace().toString().substring(6)),
-                          Text('XP: ' + character.getXp().toString()),
-                          Text('Alinhamento: ' + character.getAlinhamento().toString().substring(12))
+                          Text('Level: ' + character.level.toString()),
+                          Text('Classe: ' + character.classe.toString().substring(8)),
+                          Text('Raça: ' + character.race.toString().substring(6)),
+                          Text('XP: ' + character.xp.toString()),
+                          Text('Alinhamento: ' + character.alinhamento.toString().substring(12))
                         ],
                       ),
               ),

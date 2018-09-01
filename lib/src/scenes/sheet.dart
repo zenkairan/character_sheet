@@ -83,7 +83,7 @@ class SheetState extends State<Sheet> with RouteAware{
       setState(() {
         character = _sheet.character;
         attributes = _sheet.attributes;
-        print(character.getRace().toString());
+        print(character.race.toString());
       });
       build(context); //NÃO ESTÁ ATUALIZANDO
     }
@@ -123,9 +123,9 @@ class SheetState extends State<Sheet> with RouteAware{
               AttrWidget(attributes: this.attributes),
               Column(
                 children: <Widget>[
-                  ProficienceBox(level: character.getLevel()),
-                  SavingThrowBox(attributes: attributes, level: character.getLevel(),),
-                  SkillBox(attributes: attributes, level: character.getLevel(),),
+                  ProficienceBox(level: character.level),
+                  SavingThrowBox(attributes: attributes, level: character.level,),
+                  SkillBox(attributes: attributes, level: character.level,),
                 ],
               ),
             ],

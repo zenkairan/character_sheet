@@ -90,7 +90,7 @@ class ProfileState extends State<Profile>{
                 return _validar(value);
                 
               },
-              onSaved: (value) => _attributes.setStrength(int.parse(value)),
+              onSaved: (value) => _attributes.strength = (int.parse(value)),
             ),
             TextFormField(
               decoration: InputDecoration(
@@ -104,7 +104,7 @@ class ProfileState extends State<Profile>{
               validator: (value) {
                 return _validar(value);
               },
-              onSaved: (value) => _attributes.setDexterity(int.parse(value)),
+              onSaved: (value) => _attributes.dexterity = (int.parse(value)),
             ),
             TextFormField(
               decoration: InputDecoration(
@@ -119,7 +119,7 @@ class ProfileState extends State<Profile>{
                 return _validar(value);
                 
               },
-              onSaved: (value) => _attributes.setConstitution(int.parse(value)),
+              onSaved: (value) => _attributes.constitution =(int.parse(value)),
             ),
             TextFormField(
               decoration: InputDecoration(
@@ -134,7 +134,7 @@ class ProfileState extends State<Profile>{
                 return _validar(value);
                 
               },
-              onSaved: (value) => _attributes.setIntelligence(int.parse(value)),
+              onSaved: (value) => _attributes.intelligence = (int.parse(value)),
             ),
             TextFormField(
               decoration: InputDecoration(
@@ -149,7 +149,7 @@ class ProfileState extends State<Profile>{
                 return _validar(value);
                 
               },
-              onSaved: (value) => _attributes.setWisdom(int.parse(value)),
+              onSaved: (value) => _attributes.wisdom = (int.parse(value)),
             ),
             TextFormField(
               decoration: InputDecoration(
@@ -164,7 +164,7 @@ class ProfileState extends State<Profile>{
                 return _validar(value);
                 
               },
-              onSaved: (value) => _attributes.setCharisma(int.parse(value)),
+              onSaved: (value) => _attributes.charisma = (int.parse(value)),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -172,7 +172,7 @@ class ProfileState extends State<Profile>{
                 onPressed: (){
                   if(_formKey.currentState.validate()){
                     _formKey.currentState.save();
-                    debugPrint(_attributes.getStrenght().toString());
+                    debugPrint(_attributes.strength.toString());
                     //TEM ALGUM PROBLEMA COM CONTEXT
                     // Scaffold.of(context).showSnackBar(SnackBar(content: Text('Validando'),));
                     writeAttributes(json.encode(_attributes));
