@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:character_sheet/src/beans/Character.dart';
+import 'package:character_sheet/src/singletons/SheetSingleton.dart';
 
 class CharacterBox extends StatefulWidget{
   CharacterBox({@required this.character});
@@ -12,6 +14,16 @@ class CharacterBox extends StatefulWidget{
 class CharacterBoxState extends State<CharacterBox>{
   CharacterBoxState({@required this.character});
   Character character;
+  SheetSingleton _sheet = new SheetSingleton();
+
+
+
+  @override
+    void didUpdateWidget(CharacterBox oldWidget) {
+      super.didUpdateWidget(oldWidget);
+      character = _sheet.character;
+    }
+
 
   @override
   Widget build(BuildContext context){
@@ -67,4 +79,5 @@ class CharacterBoxState extends State<CharacterBox>{
       ),
     );
   }
+
 }

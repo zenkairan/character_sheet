@@ -30,6 +30,7 @@ class SheetState extends State<Sheet> with RouteAware{
   Character character;
   SheetSingleton _sheet = new SheetSingleton();
   RouteObserver<PageRoute> routeObserver;
+  final GlobalKey<ScaffoldState> _sheetKey = new GlobalKey<ScaffoldState>();
   /*TODO:
    * tornar sheet a pagina inicial sem obrigatoriedades.
    * criar loading para os arquivos asincronos
@@ -76,21 +77,22 @@ class SheetState extends State<Sheet> with RouteAware{
     // TODO: implement didPush
     super.didPush();
   }
-  @override
-  void didPopNext() {
-      // TODO: implement didPopNext
-      super.didPopNext();
-      setState(() {
-        character = _sheet.character;
-        attributes = _sheet.attributes;
-        print(character.race.toString());
-      });
-      build(context); //NÃO ESTÁ ATUALIZANDO
-    }
+  // @override
+  // void didPopNext() {
+  //     // TODO: implement didPopNext
+  //     super.didPopNext();
+  //     setState(() {
+  //       character = _sheet.character;
+  //       attributes = _sheet.attributes;
+  //       // _sheetKey.currentState.build(context);
+  //     });
+  //     // build(context); //NÃO ESTÁ ATUALIZANDO
+  //   }
 
   @override
   Widget build(BuildContext context){
     return Scaffold(
+      key: _sheetKey,
       appBar: AppBar(
         title: Text('Ficha'),
       ),
@@ -98,6 +100,8 @@ class SheetState extends State<Sheet> with RouteAware{
         future: readData(),
         builder: (BuildContext context, AsyncSnapshot snapshot){
           if(snapshot.hasData){
+            print(snapshot.data[0]);
+            //TODO maybe didpopnext is unnecessary
             if(snapshot.data != null){
               this.character = new Character.fromJson(json.decode(snapshot.data[0]));
               _sheet.character = this.character;
@@ -106,7 +110,11 @@ class SheetState extends State<Sheet> with RouteAware{
               return _renderSheet(context);
             }
           }else{
-            return new CircularProgressIndicator();
+            //TODO:centralizar
+            return new Center(
+              child: new CircularProgressIndicator(),
+            ); 
+            
           }
         },
       ),
@@ -115,6 +123,7 @@ class SheetState extends State<Sheet> with RouteAware{
   }
 
   Widget _renderSheet(BuildContext context){
+    print(character.classe.index);
     return ListView(
         children: <Widget>[
           CharacterBox(character: character,),

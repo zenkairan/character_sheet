@@ -16,7 +16,10 @@ class MainDrowerState extends State<MainDrower>{
           children: <Widget>[
             FlatButton(
               child: Text('Edit Character'),
-              onPressed: () => Navigator.pushNamed(context, '/character')
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/character');
+                }
             ),
           ],
         ),
