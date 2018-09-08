@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:character_sheet/src/beans/Attributes.dart';
 import 'package:character_sheet/src/widgets/AttributeBox.dart';
+import 'package:character_sheet/src/singletons/SheetSingleton.dart';
 
 
 class AttrWidget extends StatefulWidget{
@@ -14,6 +16,14 @@ class AttrWidget extends StatefulWidget{
 class AttrWidgetState extends State<AttrWidget>{
   AttrWidgetState({this.attributes});
   Attributes attributes;
+  SheetSingleton _sheet = new SheetSingleton();
+
+  @override
+  void didUpdateWidget(AttrWidget oldWidget) {
+      // TODO: implement didUpdateWidget
+      super.didUpdateWidget(oldWidget);
+      this.attributes = _sheet.attributes;
+    }
 
   @override
   Widget build(BuildContext context){
@@ -43,9 +53,3 @@ class AttrWidgetState extends State<AttrWidget>{
     );
   }
 }
-
-// Column(
-//               children: <Widget>[
-//                 Text('STR')
-//               ],
-//             ),

@@ -59,7 +59,6 @@ Future<String> get _localPath async{
 @override
 void initState(){
   super.initState();
-  _sheet = new SheetSingleton();
   if(_sheet.character != null){
     _character = _sheet.character;
     _selectedClass = _character.classe.index;

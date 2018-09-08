@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:character_sheet/src/beans/Attributes.dart';
-import 'package:character_sheet/src/beans/Character.dart';
-import 'package:character_sheet/src/scenes/sheet.dart';
-import  'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:character_sheet/src/beans/Attributes.dart';
+import 'package:character_sheet/src/scenes/sheet.dart';
+import  'package:path_provider/path_provider.dart';
+import 'package:character_sheet/src/singletons/SheetSingleton.dart';
+
 class Profile extends StatefulWidget{
-  Profile({@required this.character});
-  final Character character;
   @override
-  createState() => ProfileState(character: character);
+  createState() => ProfileState();
 }
 
 class ProfileState extends State<Profile>{
-  ProfileState({@required this.character});
-  Character character;
   final _formKey = GlobalKey<FormState>();
+
   Attributes _attributes = new Attributes();
+  SheetSingleton _sheet = new SheetSingleton();
+  //TODO: provavelmente não vai precisar buscar arquivo
   
   Future<String> get _localPath async{
     final directory = await getApplicationDocumentsDirectory();
@@ -48,16 +48,18 @@ class ProfileState extends State<Profile>{
   @override
   void initState(){
     super.initState();
-    readAttributes().then((String value){
-      if(value == null){
-        return;
-      }
-      _attributes = new Attributes.fromJson(json.decode(value));
-      print(_attributes);
-      Navigator.push(context, new MaterialPageRoute(
-        builder: (BuildContext context) => new Sheet(attributes: _attributes, character: character,)
-      ));
-    });
+    if(_sheet.attributes != null){
+      _attributes = _sheet.attributes;
+    }
+    // readAttributes().then((String value){
+    //   if(value == null){
+    //     return;
+    //   }
+    //   _attributes = new Attributes.fromJson(json.decode(value));
+    //   Navigator.push(context, new MaterialPageRoute(
+    //     builder: (BuildContext context) => new Sheet()
+    //   ));
+    // });
   }
 
   @override
@@ -78,6 +80,7 @@ class ProfileState extends State<Profile>{
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             TextFormField(
+              initialValue: _attributes != null? _attributes.strength.toString(): null,
               decoration: InputDecoration(
                 labelText: 'Força (STR)',
                 labelStyle: TextStyle(
@@ -93,6 +96,7 @@ class ProfileState extends State<Profile>{
               onSaved: (value) => _attributes.strength = (int.parse(value)),
             ),
             TextFormField(
+              initialValue: _attributes != null? _attributes.dexterity.toString(): null,
               decoration: InputDecoration(
                 labelText: 'Destreza (DEX)',
                 labelStyle: TextStyle(
@@ -107,6 +111,7 @@ class ProfileState extends State<Profile>{
               onSaved: (value) => _attributes.dexterity = (int.parse(value)),
             ),
             TextFormField(
+              initialValue: _attributes != null? _attributes.constitution.toString(): null,
               decoration: InputDecoration(
                 labelText: 'Constituição (CON)',
                 labelStyle: TextStyle(
@@ -122,6 +127,7 @@ class ProfileState extends State<Profile>{
               onSaved: (value) => _attributes.constitution =(int.parse(value)),
             ),
             TextFormField(
+              initialValue: _attributes != null? _attributes.intelligence.toString(): null,
               decoration: InputDecoration(
                 labelText: 'Inteligência (INT)',
                 labelStyle: TextStyle(
@@ -137,6 +143,7 @@ class ProfileState extends State<Profile>{
               onSaved: (value) => _attributes.intelligence = (int.parse(value)),
             ),
             TextFormField(
+              initialValue: _attributes != null? _attributes.wisdom.toString(): null,
               decoration: InputDecoration(
                 labelText: 'Sabedoria (WIS)',
                 labelStyle: TextStyle(
@@ -152,6 +159,7 @@ class ProfileState extends State<Profile>{
               onSaved: (value) => _attributes.wisdom = (int.parse(value)),
             ),
             TextFormField(
+              initialValue: _attributes != null? _attributes.charisma.toString(): null,
               decoration: InputDecoration(
                 labelText: 'Carisma (CHA)',
                 labelStyle: TextStyle(
@@ -172,12 +180,11 @@ class ProfileState extends State<Profile>{
                 onPressed: (){
                   if(_formKey.currentState.validate()){
                     _formKey.currentState.save();
-                    debugPrint(_attributes.strength.toString());
                     //TEM ALGUM PROBLEMA COM CONTEXT
                     // Scaffold.of(context).showSnackBar(SnackBar(content: Text('Validando'),));
                     writeAttributes(json.encode(_attributes));
                     Navigator.push(context, new MaterialPageRoute(
-                      builder: (BuildContext context) => new Sheet(attributes: _attributes, character: character,)
+                      builder: (BuildContext context) => new Sheet()
                     ));
                     // Navigator.of(context).pushNamed('/sheet');
                   }

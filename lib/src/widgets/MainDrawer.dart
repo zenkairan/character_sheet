@@ -21,6 +21,13 @@ class MainDrowerState extends State<MainDrower>{
                 Navigator.pushNamed(context, '/character');
                 }
             ),
+            FlatButton(
+              child: Text('Edit Attributes'),
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/attributes');
+                }
+            ),
           ],
         ),
       );

@@ -16,20 +16,18 @@ import 'package:path_provider/path_provider.dart';
 
 
 class Sheet extends StatefulWidget{
-  Sheet({this.attributes, this.character, this.routeObserver});
-  final Attributes attributes;
-  final Character character;
-  final routeObserver;
+  // Sheet({this.routeObserver});
+  // final routeObserver;
   @override
-  createState() => SheetState(attributes: attributes, character: character, routeObserver: routeObserver);
+  createState() => SheetState();
 }
 
 class SheetState extends State<Sheet> with RouteAware{
-  SheetState({this.attributes, this.character, this.routeObserver});
+  // SheetState({this.routeObserver});
   Attributes attributes;
   Character character;
   SheetSingleton _sheet = new SheetSingleton();
-  RouteObserver<PageRoute> routeObserver;
+  // RouteObserver<PageRoute> routeObserver;
   final GlobalKey<ScaffoldState> _sheetKey = new GlobalKey<ScaffoldState>();
   /*TODO:
    * tornar sheet a pagina inicial sem obrigatoriedades.
@@ -60,23 +58,23 @@ class SheetState extends State<Sheet> with RouteAware{
     }
   }
 // observer para atualizar os dados quando tem pop ou push
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-    routeObserver.subscribe(this, ModalRoute.of(context));
-  }
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    routeObserver.unsubscribe(this);
-  }
-  @override
-  void didPush() {
-    // TODO: implement didPush
-    super.didPush();
-  }
+  // @override
+  // void didChangeDependencies() {
+  //   // TODO: implement didChangeDependencies
+  //   super.didChangeDependencies();
+  //   routeObserver.subscribe(this, ModalRoute.of(context));
+  // }
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   super.dispose();
+  //   routeObserver.unsubscribe(this);
+  // }
+  // @override
+  // void didPush() {
+  //   // TODO: implement didPush
+  //   super.didPush();
+  // }
   // @override
   // void didPopNext() {
   //     // TODO: implement didPopNext
@@ -100,8 +98,6 @@ class SheetState extends State<Sheet> with RouteAware{
         future: readData(),
         builder: (BuildContext context, AsyncSnapshot snapshot){
           if(snapshot.hasData){
-            print(snapshot.data[0]);
-            //TODO maybe didpopnext is unnecessary
             if(snapshot.data != null){
               this.character = new Character.fromJson(json.decode(snapshot.data[0]));
               _sheet.character = this.character;
@@ -110,7 +106,6 @@ class SheetState extends State<Sheet> with RouteAware{
               return _renderSheet(context);
             }
           }else{
-            //TODO:centralizar
             return new Center(
               child: new CircularProgressIndicator(),
             ); 
@@ -123,7 +118,6 @@ class SheetState extends State<Sheet> with RouteAware{
   }
 
   Widget _renderSheet(BuildContext context){
-    print(character.classe.index);
     return ListView(
         children: <Widget>[
           CharacterBox(character: character,),
