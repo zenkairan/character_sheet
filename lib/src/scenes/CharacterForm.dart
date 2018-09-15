@@ -1,11 +1,11 @@
-import 'package:character_sheet/src/singletons/SheetSingleton.dart';
 import 'package:flutter/material.dart';
-import 'package:character_sheet/src/beans/Character.dart';
-import 'package:character_sheet/src/scenes/profile.dart';
-import  'package:path_provider/path_provider.dart';
+import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
+
+import 'package:character_sheet/src/beans/Character.dart';
+import 'package:character_sheet/src/singletons/SheetSingleton.dart';
 
 class CharacterForm extends StatefulWidget{
   @override

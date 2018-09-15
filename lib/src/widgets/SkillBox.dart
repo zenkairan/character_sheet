@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:character_sheet/src/beans/Attributes.dart';
 import 'package:character_sheet/src/widgets/SkillWidget.dart';
+import 'package:character_sheet/src/beans/Skills.dart';
 
 
 class SkillBox extends StatefulWidget{
@@ -30,26 +32,36 @@ class SkillBoxState extends State<SkillBox>{
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text('Skills', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),),
-          SkillWidget(name: 'Acrobatics', value: attributes.getDexterityMod(), checked: false,),
-          SkillWidget(name: 'Animal Handling', value: attributes.getWisdomMod(), checked: false,),
-          SkillWidget(name: 'Arcana', value: attributes.getIntelligenceMod(), checked: false,),
-          SkillWidget(name: 'Athetics', value: attributes.getStrenghtMod(), checked: false,),
-          SkillWidget(name: 'Deception', value: attributes.getCharismaMod(), checked: false,),
-          SkillWidget(name: 'History', value: attributes.getIntelligenceMod(), checked: false,),
-          SkillWidget(name: 'Insight', value: attributes.getWisdomMod(), checked: false,),
-          SkillWidget(name: 'Intimidation', value: attributes.getCharismaMod(), checked: false,),
-          SkillWidget(name: 'Investigation', value: attributes.getIntelligenceMod(), checked: false,),
-          SkillWidget(name: 'Medicine', value: attributes.getWisdomMod(), checked: false,),
-          SkillWidget(name: 'Nature', value: attributes.getIntelligenceMod(), checked: false,),
-          SkillWidget(name: 'Perception', value: attributes.getWisdomMod(), checked: false,),
-          SkillWidget(name: 'Performance', value: attributes.getCharismaMod(), checked: false,),
-          SkillWidget(name: 'Persuasion', value: attributes.getCharismaMod(), checked: false,),
-          SkillWidget(name: 'Religion', value: attributes.getIntelligenceMod(), checked: false,),
-          SkillWidget(name: 'Sleight of Hand', value: attributes.getDexterityMod(), checked: false,),
-          SkillWidget(name: 'Stealth', value: attributes.getDexterityMod(), checked: false,),
-          SkillWidget(name: 'Survival', value: attributes.getWisdomMod(), checked: false,),
-        ],
+          // SkillWidget(name: 'Acrobatics', value: attributes.getDexterityMod(), checked: false,),
+          // SkillWidget(name: 'Animal Handling', value: attributes.getWisdomMod(), checked: false,),
+          // SkillWidget(name: 'Arcana', value: attributes.getIntelligenceMod(), checked: false,),
+          // SkillWidget(name: 'Athetics', value: attributes.getStrenghtMod(), checked: false,),
+          // SkillWidget(name: 'Deception', value: attributes.getCharismaMod(), checked: false,),
+          // SkillWidget(name: 'History', value: attributes.getIntelligenceMod(), checked: false,),
+          // SkillWidget(name: 'Insight', value: attributes.getWisdomMod(), checked: false,),
+          // SkillWidget(name: 'Intimidation', value: attributes.getCharismaMod(), checked: false,),
+          // SkillWidget(name: 'Investigation', value: attributes.getIntelligenceMod(), checked: false,),
+          // SkillWidget(name: 'Medicine', value: attributes.getWisdomMod(), checked: false,),
+          // SkillWidget(name: 'Nature', value: attributes.getIntelligenceMod(), checked: false,),
+          // SkillWidget(name: 'Perception', value: attributes.getWisdomMod(), checked: false,),
+          // SkillWidget(name: 'Performance', value: attributes.getCharismaMod(), checked: false,),
+          // SkillWidget(name: 'Persuasion', value: attributes.getCharismaMod(), checked: false,),
+          // SkillWidget(name: 'Religion', value: attributes.getIntelligenceMod(), checked: false,),
+          // SkillWidget(name: 'Sleight of Hand', value: attributes.getDexterityMod(), checked: false,),
+          // SkillWidget(name: 'Stealth', value: attributes.getDexterityMod(), checked: false,),
+          // SkillWidget(name: 'Survival', value: attributes.getWisdomMod(), checked: false,),
+        ] + _skillList(),
       ),
     );
+  }
+
+  List<Widget> _skillList(){
+    List<Widget> list = new List<Widget>();
+
+    for(int i = 0; i < SkillList.values.length; i ++){
+      //TODO: pegar o valor correto de modificador para a skill
+      list.add(SkillWidget(name: SkillList.values[i].toString().substring(SkillList.values[i].toString().indexOf('.')+ 1).replaceAll('_', ' '), value: attributes.getDexterityMod(), checked: false,));
+    }
+    return list;
   }
 }

@@ -127,7 +127,7 @@ class SheetState extends State<Sheet> with RouteAware{
               Column(
                 children: <Widget>[
                   ProficienceBox(level: character.level),
-                  SavingThrowBox(attributes: attributes, level: character.level,),
+                  SavingThrowBox(),
                   SkillBox(attributes: attributes, level: character.level,),
                 ],
               ),

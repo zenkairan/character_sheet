@@ -1,21 +1,34 @@
 import 'package:flutter/material.dart';
+
 import 'package:character_sheet/src/beans/Attributes.dart';
 import 'package:character_sheet/src/widgets/SkillWidget.dart';
+import 'package:character_sheet/src/singletons/SheetSingleton.dart';
 
 
 class SavingThrowBox extends StatefulWidget{
-  SavingThrowBox({@required this.attributes, @required this.level});
-  final Attributes attributes;
-  final int level;
 
   @override
-  createState() => SavingThrowBoxState(attributes: attributes, level: level);
+  createState() => SavingThrowBoxState();
 }
 
 class SavingThrowBoxState extends State<SavingThrowBox>{
-  SavingThrowBoxState({@required this.attributes, @required this.level});
   Attributes attributes;
   int level;
+  SheetSingleton _sheet = new SheetSingleton();
+
+  @override
+  void initState() {
+    super.initState();
+    this.attributes = _sheet.attributes;
+    this.level = _sheet.character.level;
+  }
+  
+  @override
+  void didUpdateWidget(SavingThrowBox oldWidget) {
+      super.didUpdateWidget(oldWidget);
+      this.attributes = _sheet.attributes;
+      this.level = _sheet.character.level;
+    }
 
   @override
   Widget build(BuildContext context){
