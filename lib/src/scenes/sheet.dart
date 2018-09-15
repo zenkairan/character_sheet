@@ -1,18 +1,19 @@
+import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:character_sheet/src/singletons/SheetSingleton.dart';
-import 'package:flutter/material.dart';
 import 'package:character_sheet/src/beans/Attributes.dart';
 import 'package:character_sheet/src/beans/Character.dart';
+import 'package:character_sheet/src/beans/Skills.dart';
 import 'package:character_sheet/src/widgets/AttrWidget.dart';
 import 'package:character_sheet/src/widgets/CharacterBox.dart';
 import 'package:character_sheet/src/widgets/ProficienceBox.dart';
 import 'package:character_sheet/src/widgets/SavingThrowBox.dart';
 import 'package:character_sheet/src/widgets/SkillBox.dart';
 import 'package:character_sheet/src/widgets/MainDrawer.dart';
-import 'package:path_provider/path_provider.dart';
 
 
 class Sheet extends StatefulWidget{
@@ -26,6 +27,7 @@ class SheetState extends State<Sheet> with RouteAware{
   // SheetState({this.routeObserver});
   Attributes attributes;
   Character character;
+  Skills skills;
   SheetSingleton _sheet = new SheetSingleton();
   // RouteObserver<PageRoute> routeObserver;
   final GlobalKey<ScaffoldState> _sheetKey = new GlobalKey<ScaffoldState>();
@@ -46,46 +48,25 @@ class SheetState extends State<Sheet> with RouteAware{
     final path = await _localPath;
     return File('$path/attributes.json');
   }
+  Future<File> get _skillsFile async{
+    final path = await _localPath;
+    return File('$path/skill.json');
+  }
   Future<List> readData() async{
+    //TODO: explode erro quando ainda não há arquivos e nada carrega!!!!!!!
     try {
       final characterFile = await _characterFile;
       final attributesFile = await _attributesFile;
+      final skillsFile = await _skillsFile;
       String character = await characterFile.readAsString();
       String attributes = await attributesFile.readAsString();
-      return [character,attributes];
+      String skills = await skillsFile.readAsString();
+      return [character,attributes, skills];
     } catch (e) {
+      print(e);
       return null;
     }
   }
-// observer para atualizar os dados quando tem pop ou push
-  // @override
-  // void didChangeDependencies() {
-  //   // TODO: implement didChangeDependencies
-  //   super.didChangeDependencies();
-  //   routeObserver.subscribe(this, ModalRoute.of(context));
-  // }
-  // @override
-  // void dispose() {
-  //   // TODO: implement dispose
-  //   super.dispose();
-  //   routeObserver.unsubscribe(this);
-  // }
-  // @override
-  // void didPush() {
-  //   // TODO: implement didPush
-  //   super.didPush();
-  // }
-  // @override
-  // void didPopNext() {
-  //     // TODO: implement didPopNext
-  //     super.didPopNext();
-  //     setState(() {
-  //       character = _sheet.character;
-  //       attributes = _sheet.attributes;
-  //       // _sheetKey.currentState.build(context);
-  //     });
-  //     // build(context); //NÃO ESTÁ ATUALIZANDO
-  //   }
 
   @override
   Widget build(BuildContext context){
@@ -103,6 +84,8 @@ class SheetState extends State<Sheet> with RouteAware{
               _sheet.character = this.character;
               this.attributes = new Attributes.fromJson(json.decode(snapshot.data[1]));
               _sheet.attributes = this.attributes;
+              this.skills = new Skills.fromJson(json.decode(snapshot.data[2]));
+              _sheet.skills = this.skills;
               return _renderSheet(context);
             }
           }else{

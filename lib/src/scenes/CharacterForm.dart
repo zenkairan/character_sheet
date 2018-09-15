@@ -21,7 +21,7 @@ class CharacterFormState extends State<CharacterForm>{
   int _selectedAlinhamento;
   SheetSingleton _sheet = new SheetSingleton();
 
-Future<String> get _localPath async{
+  Future<String> get _localPath async{
     final directory = await getApplicationDocumentsDirectory();
     return directory.path;
   }
