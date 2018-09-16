@@ -1,3 +1,5 @@
+import 'package:character_sheet/src/beans/Skills.dart';
+
 
 class Attributes{
   int strength;
@@ -50,6 +52,32 @@ class Attributes{
     return ((charisma - 10)/ 2).round();
   }
   //
+
+  int modByIndex(AttList att){
+    int value = 0;
+    switch (att) {
+      case AttList.strength:
+        value = getStrenghtMod();
+        break;
+      case AttList.dexterity:
+        value = getDexterityMod();
+        break;
+      case AttList.intelligence:
+        value = getIntelligenceMod();
+        break;
+      case AttList.constitution:
+        value = getConstitutionMod();
+        break;
+      case AttList.wisdom:
+        value = getWisdomMod();
+        break;
+      case AttList.charisma:
+        value = getCharismaMod();
+        break;
+      default:
+    }
+    return value;
+  }
 
   @override
     String toString() {

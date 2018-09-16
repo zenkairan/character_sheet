@@ -72,7 +72,6 @@ class Skills{
     return skillList;
   }
   List<AttList> _deserializeSavingThrows(List jsonList){
-    print(jsonList);
     List<AttList> savings = new List<AttList>();
     for(int i = 0; i < jsonList.length; i++){
       savings.add(AttList.values[jsonList[i]]);
@@ -80,7 +79,6 @@ class Skills{
     return savings;
   }
   List<SkillList> _deserializeSkills(List jsonList){
-    print(jsonList);
     List<SkillList> skillList = new List<SkillList>();
     for(int i = 0; i < jsonList.length; i++){
       skillList.add(SkillList.values[jsonList[i]]);
