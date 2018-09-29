@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:character_sheet/src/beans/Attributes.dart';
-import 'package:character_sheet/src/widgets/SkillWidget.dart';
 import 'package:character_sheet/src/beans/Skills.dart';
+import 'package:character_sheet/src/singletons/SheetSingleton.dart';
 
 
 class SkillBox extends StatefulWidget{
@@ -18,6 +18,25 @@ class SkillBoxState extends State<SkillBox>{
   SkillBoxState({@required this.attributes, @required this.level});
   Attributes attributes;
   int level;
+  List<SkillList> skills;
+  SheetSingleton _sheet = new SheetSingleton();
+
+  @override
+  void initState() {
+    super.initState();
+    _updateAttributes();
+  }
+  
+  @override
+  void didUpdateWidget(SkillBox oldWidget) {
+      super.didUpdateWidget(oldWidget);
+      _updateAttributes();
+    }
+
+  void _updateAttributes(){
+      this.attributes = _sheet.attributes;
+      this.skills = _sheet.skills.skl;
+  }
 
   @override
   Widget build(BuildContext context){
@@ -40,6 +59,7 @@ class SkillBoxState extends State<SkillBox>{
   List<Widget> _skillList(){
     List<Widget> list = new List<Widget>();
     int modValue = attributes.getConstitutionMod();
+    bool checked;
     for(int i = 0; i < SkillList.values.length; i ++){
       Skills.skillByAtt.forEach((key, value){
         if(value.contains(SkillList.values[i])){
@@ -66,10 +86,28 @@ class SkillBoxState extends State<SkillBox>{
               modValue = attributes.getConstitutionMod();
               break;
           }
+          checked = skills.contains(SkillList.values[i]);
         }
       });
-      list.add(SkillWidget(name: SkillList.values[i].toString().substring(SkillList.values[i].toString().indexOf('.')+ 1).replaceAll('_', ' '), value: modValue, checked: false,));
+      list.add(_skill(checked,
+        checked? (modValue + level).toString() : modValue.toString(), 
+        SkillList.values[i].toString().substring(SkillList.values[i].toString().indexOf('.')+ 1).replaceAll('_', ' ')));
     }
     return list;
+  }
+
+  Widget _skill(bool checked, String value, String name){
+    IconData icon = checked? Icons.radio_button_checked: Icons.radio_button_unchecked; 
+    return Row(
+      children: <Widget>[
+        Icon(icon),
+        Container(
+          child: Text(value.toString()),
+          margin: EdgeInsets.fromLTRB(5.0, 0.0, 10.0, 0.0),
+        ),
+        Text(name,
+        style: TextStyle(fontWeight: FontWeight.bold),)
+      ],
+    );
   }
 }

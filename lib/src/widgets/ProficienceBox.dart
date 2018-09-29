@@ -39,7 +39,7 @@ class ProficienceBoxState extends State<ProficienceBox>{
                           border: Border.all(color: Colors.black),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
-                         child: Text('3'),
+                         child: Text(level.toString()),
                       ),
                       Text('Inspiração')
                     ],
@@ -61,7 +61,7 @@ class ProficienceBoxState extends State<ProficienceBox>{
                           border: Border.all(color: Colors.black),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
-                         child: Text(level.toString()),
+                         child: Text('3'),
                       ),
                       Text('Proficiência')
                     ],
