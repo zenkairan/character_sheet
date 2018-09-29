@@ -58,7 +58,7 @@ class SkillsFormState extends State<SkillsForm>{
     Widget build(BuildContext context) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Profile'),
+          title: Text('Skills'),
         ),
         body: skillForm(context),
       );
@@ -91,6 +91,11 @@ class SkillsFormState extends State<SkillsForm>{
                     headerBuilder: (BuildContext context, bool isExpanded){
                       return ListTile(
                         title: Text('Saving Throws'),
+                        onTap: (){
+                          setState(() {
+                            _expandSaving = !_expandSaving;
+                          });
+                        },
                       );
                     }
                   ),
@@ -102,6 +107,11 @@ class SkillsFormState extends State<SkillsForm>{
                     headerBuilder: (BuildContext context, bool isExpanded){
                       return ListTile(
                         title: Text('Saving Throws'),
+                        onTap: (){
+                          setState(() {
+                            _expandSkills = !_expandSkills;
+                          });
+                        },
                       );
                     }
                   ),
