@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'dart:async';
 
 import 'package:character_sheet/src/beans/Character.dart';
 import 'package:character_sheet/src/singletons/SheetSingleton.dart';
@@ -15,7 +18,27 @@ class CharacterBoxState extends State<CharacterBox>{
   CharacterBoxState({@required this.character});
   Character character;
   SheetSingleton _sheet = new SheetSingleton();
+  ImageSource _source = ImageSource.camera;
 
+  Image _imagem = Image.asset(
+                        'assets/blank_portrait.jpg',
+                        alignment: Alignment(-0.00, 0.00),
+                        height: 120.00,
+                        width: 120.00,
+                        fit: BoxFit.contain ,
+                        );
+
+  Future getImage() async{
+    var image = await ImagePicker.pickImage(source: _source);
+    setState(() {
+      _imagem = Image.file(image,
+                        alignment: Alignment(-0.00, 0.00),
+                        height: 120.00,
+                        width: 120.00,
+                        fit: BoxFit.contain 
+                    );
+    });
+  }
 
 
   @override
@@ -63,13 +86,11 @@ class CharacterBoxState extends State<CharacterBox>{
                       border: Border.all(color: Colors.black),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    child: Image.network(
-                            'https://cdn2.bigcommerce.com/server4900/364bb/products/150000/images/109252/195771__19255.1342531738.380.500.jpg?c=2',
-                            alignment: Alignment(-0.00, 0.00),
-                            height: 120.00,
-                            width: 120.00,
-                            fit: BoxFit.contain ,
-                          ),
+                    child: FlatButton(
+                      child: _imagem,
+                      onPressed: () => getImage(),
+                    )
+                      //Implement simpledialog
                   )
                 ],
               ),
