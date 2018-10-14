@@ -35,6 +35,13 @@ class MainDrowerState extends State<MainDrower>{
                 Navigator.pushNamed(context, '/skills');
                 }
             ),
+            FlatButton(
+              child: Text('Combat'),
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/combatManager');
+                }
+            ),
           ],
         ),
       );

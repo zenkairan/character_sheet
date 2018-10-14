@@ -115,14 +115,14 @@ class CharacterBoxState extends State<CharacterBox>{
                       future: readData(),
                       builder: (BuildContext context, AsyncSnapshot snapshot){
                         if(snapshot.hasData && snapshot.data != null){
-                          setState(() {
-                            // _imagem = Image.file(snapshot.data,
-                            //     alignment: Alignment(-0.00, 0.00),
-                            //     height: 120.00,
-                            //     width: 120.00,
-                            //     fit: BoxFit.contain 
-                            // );
-                          });
+                          // setState(() {
+                          //   // _imagem = Image.file(snapshot.data,
+                          //   //     alignment: Alignment(-0.00, 0.00),
+                          //   //     height: 120.00,
+                          //   //     width: 120.00,
+                          //   //     fit: BoxFit.contain 
+                          //   // );
+                          // });
                           return FlatButton(
                             child: _imagem,
                             onPressed: (){
