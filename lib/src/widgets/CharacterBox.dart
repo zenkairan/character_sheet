@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'dart:async';
+import 'package:path_provider/path_provider.dart';
 
 import 'package:character_sheet/src/beans/Character.dart';
 import 'package:character_sheet/src/singletons/SheetSingleton.dart';
@@ -18,7 +19,6 @@ class CharacterBoxState extends State<CharacterBox>{
   CharacterBoxState({@required this.character});
   Character character;
   SheetSingleton _sheet = new SheetSingleton();
-  ImageSource _source = ImageSource.camera;
 
   Image _imagem = Image.asset(
                         'assets/blank_portrait.jpg',
@@ -28,8 +28,13 @@ class CharacterBoxState extends State<CharacterBox>{
                         fit: BoxFit.contain ,
                         );
 
-  Future getImage() async{
-    var image = await ImagePicker.pickImage(source: _source);
+  Future getImage(ImageSource source) async{
+    File image = await ImagePicker.pickImage(source: source,);
+    final path = await _localPath;
+    print(path);
+    image = await image.rename('/storage/emulated/0/Android/data/com.example.charactersheet/files/Pictures/prifilepic.jpg');
+    print(image);
+    // File newImage = await image.copy('$_localPath/profilepic.png');
     setState(() {
       _imagem = Image.file(image,
                         alignment: Alignment(-0.00, 0.00),
@@ -40,7 +45,27 @@ class CharacterBoxState extends State<CharacterBox>{
     });
   }
 
+  //file
+  Future<String> get _localPath async{
+    //external só funciona em android <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    final directory = await getExternalStorageDirectory();
+    return directory.path;
+  }
+  Future<File> get _imageFile async{
+    final path = await _localPath;
+    return File('/storage/emulated/0/Android/data/com.example.charactersheet/files/Pictures/prifilepic.jpg');
+  }
 
+  Future<File> readData() async{
+    try {
+      File imageFile = await _imageFile;
+      return imageFile;
+    } catch (e) {
+      print(e);
+      return null;
+    }
+  }
+  
   @override
     void didUpdateWidget(CharacterBox oldWidget) {
       super.didUpdateWidget(oldWidget);
@@ -86,10 +111,32 @@ class CharacterBoxState extends State<CharacterBox>{
                       border: Border.all(color: Colors.black),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    child: FlatButton(
-                      child: _imagem,
-                      onPressed: () => getImage(),
-                    )
+                    child: FutureBuilder(
+                      future: readData(),
+                      builder: (BuildContext context, AsyncSnapshot snapshot){
+                        if(snapshot.hasData && snapshot.data != null){
+                          setState(() {
+                            // _imagem = Image.file(snapshot.data,
+                            //     alignment: Alignment(-0.00, 0.00),
+                            //     height: 120.00,
+                            //     width: 120.00,
+                            //     fit: BoxFit.contain 
+                            // );
+                          });
+                          return FlatButton(
+                            child: _imagem,
+                            onPressed: (){
+                              _dialog(context);
+                            },
+                          );
+                        }else{
+                          return new Center(
+                            child: new CircularProgressIndicator(),
+                          ); 
+                        }
+
+                      },
+                    ),
                       //Implement simpledialog
                   )
                 ],
@@ -99,6 +146,33 @@ class CharacterBoxState extends State<CharacterBox>{
         ],
       ),
     );
+  }
+
+  Future _dialog(BuildContext context){
+    return showDialog(
+      context: context,
+      builder: (BuildContext context){
+        return SimpleDialog(
+          children: <Widget>[
+            SimpleDialogOption(
+              child: Text('Galeria'),
+              onPressed: (){
+                getImage(ImageSource.gallery);
+                Navigator.pop(context);
+              }
+            ),
+            SimpleDialogOption(
+              child: Text('Câmera'),
+              onPressed: (){
+                getImage(ImageSource.camera);
+              }
+            )
+          ],
+        );
+      }
+    ); 
+    
+    
   }
 
 }
