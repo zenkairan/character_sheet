@@ -104,16 +104,20 @@ class SheetState extends State<Sheet> with RouteAware{
     return ListView(
         children: <Widget>[
           CharacterBox(character: character,),
+          AttrWidget(attributes: this.attributes),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              AttrWidget(attributes: this.attributes),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  ProficienceBox(level: character.level),
-                  SavingThrowBox(),
-                  SkillBox(attributes: attributes, level: character.level,),
+                ProficienceBox(level: character.level),
+                SavingThrowBox(),
                 ],
               ),
+              SkillBox(attributes: attributes, level: character.level,),
             ],
           ),
         ],

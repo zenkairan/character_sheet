@@ -15,7 +15,7 @@ class ProficienceBoxState extends State<ProficienceBox>{
   @override
   Widget build(BuildContext context){
     return Container(
-            margin: const EdgeInsets.fromLTRB(5.0, 2.0, 5.0, 2.0),
+            margin: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 2.0),
             padding: const EdgeInsets.fromLTRB(10.0, 3.0, 10.0, 3.0),
             decoration: BoxDecoration(
               border: Border.all(color: Colors.black),
