@@ -51,6 +51,7 @@ class CharacterFormState extends State<CharacterForm>{
     return Scaffold(
       appBar: AppBar(
         title: Text('Profile'),
+        backgroundColor: Colors.blueGrey,
       ),
       body: characterForm(context),
     );

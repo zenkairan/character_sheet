@@ -67,6 +67,7 @@ class ProfileState extends State<Profile>{
     return Scaffold(
       appBar: AppBar(
         title: Text('Profile'),
+        backgroundColor: Colors.blueGrey,
       ),
       body: _attributesForm(context),
     );

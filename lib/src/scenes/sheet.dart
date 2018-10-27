@@ -74,6 +74,7 @@ class SheetState extends State<Sheet> with RouteAware{
       key: _sheetKey,
       appBar: AppBar(
         title: Text('Ficha'),
+        backgroundColor: Colors.blueGrey,
       ),
       body: FutureBuilder(
         future: readData(),

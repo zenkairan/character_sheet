@@ -89,18 +89,20 @@ class CharacterBoxState extends State<CharacterBox>{
             children: <Widget>[
               Expanded(
                 child: Column(
-                        children: <Widget>[
-                          Text(character.name,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),
-                          ),
-                          Text('Level: ' + character.level.toString()),
-                          Text('Classe: ' + character.classe.toString().substring(8)),
-                          Text('Raça: ' + character.race.toString().substring(6)),
-                          Text('XP: ' + character.xp.toString()),
-                          Text('Alinhamento: ' + character.alinhamento.toString().substring(12))
-                        ],
-                      ),
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(character.name,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),
+                    ),
+                    Text('Level: ' + character.level.toString()),
+                    Text('Classe: ' + character.classe.toString().substring(8)),
+                    Text('Raça: ' + character.race.toString().substring(6)),
+                    Text('XP: ' + character.xp.toString()),
+                    Text('Alinhamento: ' + character.alinhamento.toString().substring(12))
+                  ],
+                ),
               ),
               Column(
                 children: <Widget>[

@@ -4,8 +4,6 @@ import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:character_sheet/src/singletons/SheetSingleton.dart';
-
 class CombatManager extends StatefulWidget{
   @override
   createState() => CombatManagerState();
@@ -52,7 +50,8 @@ class CombatManagerState extends State<CombatManager>{
     
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
+        title: Text('Combate'),
+        backgroundColor: Colors.blueGrey,
       ),
       body: FutureBuilder(
         future: readLife(),

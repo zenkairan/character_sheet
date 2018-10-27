@@ -59,6 +59,7 @@ class SkillsFormState extends State<SkillsForm>{
       return Scaffold(
         appBar: AppBar(
           title: Text('Skills'),
+          backgroundColor: Colors.blueGrey,
         ),
         body: skillForm(context),
       );
