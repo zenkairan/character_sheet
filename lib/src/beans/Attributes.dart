@@ -34,22 +34,22 @@ class Attributes{
 
   //mods
   int getStrenghtMod(){
-    return ((strength - 10)/ 2).round();
+    return ((strength - 10)~/ 2).toInt();
   }
   int getDexterityMod(){
-    return ((dexterity - 10)/ 2).round();
+    return ((dexterity - 10)~/ 2).toInt();
   }
   int getConstitutionMod(){
-    return ((constitution - 10)/ 2).round();
+    return ((constitution - 10)~/ 2).toInt();
   }
   int getIntelligenceMod(){
-    return ((intelligence - 10)/ 2).round();
+    return ((intelligence - 10)~/ 2).toInt();
   }
   int getWisdomMod(){
-    return ((wisdom - 10)/ 2).round();
+    return ((wisdom - 10)~/ 2).toInt();
   }
   int getCharismaMod(){
-    return ((charisma - 10)/ 2).round();
+    return ((charisma - 10)~/ 2).toInt();
   }
   //
 

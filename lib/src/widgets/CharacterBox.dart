@@ -31,12 +31,12 @@ class CharacterBoxState extends State<CharacterBox>{
   Future getImage(ImageSource source) async{
     File image = await ImagePicker.pickImage(source: source,);
     final path = await _localPath;
-    print(path);
-    image = await image.rename('/storage/emulated/0/Android/data/com.example.charactersheet/files/Pictures/prifilepic.jpg');
-    print(image);
-    // File newImage = await image.copy('$_localPath/profilepic.png');
+    File copyImage = await image.copy('$path/prifilepic.jpg');
+    if(source == ImageSource.camera){
+      await image.delete();
+    }
     setState(() {
-      _imagem = Image.file(image,
+      _imagem = Image.file(copyImage,
                         alignment: Alignment(-0.00, 0.00),
                         height: 120.00,
                         width: 120.00,
@@ -48,12 +48,12 @@ class CharacterBoxState extends State<CharacterBox>{
   //file
   Future<String> get _localPath async{
     //external só funciona em android <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    final directory = await getExternalStorageDirectory();
+    final directory = await getApplicationDocumentsDirectory();
     return directory.path;
   }
   Future<File> get _imageFile async{
     final path = await _localPath;
-    return File('/storage/emulated/0/Android/data/com.example.charactersheet/files/Pictures/prifilepic.jpg');
+    return File('$path/prifilepic.jpg');
   }
 
   Future<File> readData() async{
@@ -117,14 +117,12 @@ class CharacterBoxState extends State<CharacterBox>{
                       future: readData(),
                       builder: (BuildContext context, AsyncSnapshot snapshot){
                         if(snapshot.hasData && snapshot.data != null){
-                          // setState(() {
-                          //   // _imagem = Image.file(snapshot.data,
-                          //   //     alignment: Alignment(-0.00, 0.00),
-                          //   //     height: 120.00,
-                          //   //     width: 120.00,
-                          //   //     fit: BoxFit.contain 
-                          //   // );
-                          // });
+                          _imagem = Image.file(snapshot.data,
+                                alignment: Alignment(-0.00, 0.00),
+                                height: 120.00,
+                                width: 120.00,
+                                fit: BoxFit.contain 
+                            );
                           return FlatButton(
                             child: _imagem,
                             onPressed: (){
@@ -139,7 +137,6 @@ class CharacterBoxState extends State<CharacterBox>{
 
                       },
                     ),
-                      //Implement simpledialog
                   )
                 ],
               ),
@@ -167,6 +164,7 @@ class CharacterBoxState extends State<CharacterBox>{
               child: Text('Câmera'),
               onPressed: (){
                 getImage(ImageSource.camera);
+                Navigator.pop(context);
               }
             )
           ],
