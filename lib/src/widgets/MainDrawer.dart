@@ -20,12 +20,20 @@ class MainDrowerState extends State<MainDrower>{
                 Navigator.pushNamed(context, '/character');
                 }
             ),
+            Divider(
+              color: Colors.black,
+              height: 5,
+            ),
             FlatButton(
               child: Text('Edit Attributes'),
               onPressed: () {
                 Navigator.pop(context);
                 Navigator.pushNamed(context, '/attributes');
                 }
+            ),
+            Divider(
+              color: Colors.black,
+              height: 5,
             ),
             FlatButton(
               child: Text('Edit Skills'),
@@ -34,12 +42,20 @@ class MainDrowerState extends State<MainDrower>{
                 Navigator.pushNamed(context, '/skills');
                 }
             ),
+            Divider(
+              color: Colors.black,
+              height: 5,
+            ),
             FlatButton(
               child: Text('Combat'),
               onPressed: () {
                 Navigator.pop(context);
                 Navigator.pushNamed(context, '/combatManager');
                 }
+            ),
+            Divider(
+              color: Colors.black,
+              height: 5,
             ),
           ],
         ),

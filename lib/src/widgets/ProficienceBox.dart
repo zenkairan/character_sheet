@@ -22,6 +22,8 @@ class ProficienceBoxState extends State<ProficienceBox>{
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Container(
                   margin: const EdgeInsets.fromLTRB(5.0, 2.0, 5.0, 2.0),
