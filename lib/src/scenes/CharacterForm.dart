@@ -60,7 +60,6 @@ class CharacterFormState extends State<CharacterForm>{
 @override
 void initState(){
   super.initState();
-  print(_sheet.character);
   if(_sheet.character != null){
     _character = _sheet.character;
     _selectedClass = _character.classe.index;
