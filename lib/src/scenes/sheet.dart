@@ -53,7 +53,6 @@ class SheetState extends State<Sheet> with RouteAware{
     return File('$path/skill.json');
   }
   Future<List> readData() async{
-    //TODO: explode erro quando ainda não há arquivos e nada carrega!!!!!!!
     try {
       final characterFile = await _characterFile;
       final attributesFile = await _attributesFile;
@@ -90,9 +89,23 @@ class SheetState extends State<Sheet> with RouteAware{
               return _renderSheet(context);
             }
           }else{
-            return new Center(
-              child: new CircularProgressIndicator(),
-            ); 
+            return new ListView(
+                children: <Widget>[
+                  Container(
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    height: 150.0,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 60.0),
+                    child: RaisedButton(
+                      child: Text('Criar Personagem'),
+                      onPressed: () => Navigator.pushNamed(context, '/character'),
+                    ),
+                  )
+                ],
+              );
             
           }
         },

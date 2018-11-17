@@ -60,6 +60,7 @@ class CharacterFormState extends State<CharacterForm>{
 @override
 void initState(){
   super.initState();
+  print(_sheet.character);
   if(_sheet.character != null){
     _character = _sheet.character;
     _selectedClass = _character.classe.index;
@@ -74,16 +75,6 @@ void initState(){
     _selectedAlinhamento = Alinhamento.values.first.index;
     _character.alinhamento = (Alinhamento.values.first);
   }
-  // readCharacter().then((String value){
-  //     if(value == null){
-  //       return;
-  //     }
-  //     _character = new Character.fromJson(json.decode(value));
-  //     print(_character);
-  //     Navigator.push(context, new MaterialPageRoute(
-  //       builder: (BuildContext context) => new Profile(character: _character,)
-  //     ));
-  //   });
 }
 
   Widget characterForm(BuildContext context){
@@ -153,7 +144,7 @@ void initState(){
               },
             ),
             TextFormField(
-              initialValue: _character != null? _character.xp.toString(): '',
+              initialValue: (_character != null && _character.xp != null)? _character.xp.toString(): '',
               decoration: InputDecoration(labelText: 'Exp.'),
               keyboardType: TextInputType.numberWithOptions(decimal: false, signed: false),
               validator: (value){
