@@ -31,10 +31,6 @@ class SheetState extends State<Sheet> with RouteAware{
   SheetSingleton _sheet = new SheetSingleton();
   // RouteObserver<PageRoute> routeObserver;
   final GlobalKey<ScaffoldState> _sheetKey = new GlobalKey<ScaffoldState>();
-  /*TODO:
-   * tornar sheet a pagina inicial sem obrigatoriedades.
-   * criar loading para os arquivos asincronos
-   */
 
   Future<String> get _localPath async{
     final directory = await getApplicationDocumentsDirectory();
