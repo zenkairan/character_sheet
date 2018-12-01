@@ -6,7 +6,11 @@ enum Classes {
   paladin,
   ranger,
   sorcerer,
-  warlock
+  warlock,
+  rogue,
+  cleric,
+  fighter,
+  wizard
 }
 enum Races{
   aarakocra,

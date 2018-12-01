@@ -6,6 +6,7 @@ import 'dart:convert';
 
 import 'package:character_sheet/src/singletons/SheetSingleton.dart';
 import 'package:character_sheet/src/beans/Skills.dart';
+import  'package:character_sheet/src/scenes/sheet.dart';
 
 class SkillsForm extends StatefulWidget{
   @override
@@ -123,7 +124,9 @@ class SkillsFormState extends State<SkillsForm>{
                   onPressed: (){
                     writeSkill(json.encode(_skills));
                     _sheet.skills = _skills;
-                    Navigator.pop(context);
+                    Navigator.push(context, new MaterialPageRoute(
+                      builder: (BuildContext context) => new Sheet()
+                    ));
                   },
                   child: Text('Salvar'),
                 ),

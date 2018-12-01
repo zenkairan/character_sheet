@@ -166,7 +166,11 @@ void initState(){
                     _formKey.currentState.save();
                     writeCharacter(json.encode(_character));
                     _sheet.character = _character;
-                    Navigator.pop(context);
+                    if(_sheet.attributes == null){
+                      Navigator.pushNamed(context, '/attributes');
+                    }else{
+                      Navigator.pop(context);
+                    }
                   }
                 },
                 child: Text('Enviar'),

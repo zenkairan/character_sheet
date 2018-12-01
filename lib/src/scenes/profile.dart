@@ -181,13 +181,15 @@ class ProfileState extends State<Profile>{
                 onPressed: (){
                   if(_formKey.currentState.validate()){
                     _formKey.currentState.save();
-                    //TEM ALGUM PROBLEMA COM CONTEXT
-                    // Scaffold.of(context).showSnackBar(SnackBar(content: Text('Validando'),));
                     writeAttributes(json.encode(_attributes));
-                    Navigator.push(context, new MaterialPageRoute(
-                      builder: (BuildContext context) => new Sheet()
-                    ));
-                    // Navigator.of(context).pushNamed('/sheet');
+                    _sheet.attributes = _attributes;
+                    if(_sheet.skills == null){
+                      Navigator.of(context).pushNamed('/skills');
+                    }else{
+                      Navigator.push(context, new MaterialPageRoute(
+                        builder: (BuildContext context) => new Sheet()
+                      ));
+                    }
                   }
                 },
                 child: Text('Enviar'),
