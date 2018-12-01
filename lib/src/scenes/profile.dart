@@ -81,7 +81,7 @@ class ProfileState extends State<Profile>{
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             TextFormField(
-              initialValue: _attributes != null? _attributes.strength.toString(): null,
+              initialValue: _attributes != null && _attributes.strength != null? _attributes.strength.toString(): 0,
               decoration: InputDecoration(
                 labelText: 'Força (STR)',
                 labelStyle: TextStyle(
@@ -97,7 +97,7 @@ class ProfileState extends State<Profile>{
               onSaved: (value) => _attributes.strength = (int.parse(value)),
             ),
             TextFormField(
-              initialValue: _attributes != null? _attributes.dexterity.toString(): null,
+              initialValue: _attributes != null && _attributes.dexterity != null? _attributes.dexterity.toString(): 0,
               decoration: InputDecoration(
                 labelText: 'Destreza (DEX)',
                 labelStyle: TextStyle(
@@ -112,7 +112,7 @@ class ProfileState extends State<Profile>{
               onSaved: (value) => _attributes.dexterity = (int.parse(value)),
             ),
             TextFormField(
-              initialValue: _attributes != null? _attributes.constitution.toString(): null,
+              initialValue: _attributes != null && _attributes.constitution != null? _attributes.constitution.toString(): 0,
               decoration: InputDecoration(
                 labelText: 'Constituição (CON)',
                 labelStyle: TextStyle(
@@ -128,7 +128,7 @@ class ProfileState extends State<Profile>{
               onSaved: (value) => _attributes.constitution =(int.parse(value)),
             ),
             TextFormField(
-              initialValue: _attributes != null? _attributes.intelligence.toString(): null,
+              initialValue: _attributes != null && _attributes.intelligence != null? _attributes.intelligence.toString(): 0,
               decoration: InputDecoration(
                 labelText: 'Inteligência (INT)',
                 labelStyle: TextStyle(
@@ -144,7 +144,7 @@ class ProfileState extends State<Profile>{
               onSaved: (value) => _attributes.intelligence = (int.parse(value)),
             ),
             TextFormField(
-              initialValue: _attributes != null? _attributes.wisdom.toString(): null,
+              initialValue: _attributes != null && _attributes.wisdom != null? _attributes.wisdom.toString(): 0,
               decoration: InputDecoration(
                 labelText: 'Sabedoria (WIS)',
                 labelStyle: TextStyle(
@@ -160,7 +160,7 @@ class ProfileState extends State<Profile>{
               onSaved: (value) => _attributes.wisdom = (int.parse(value)),
             ),
             TextFormField(
-              initialValue: _attributes != null? _attributes.charisma.toString(): null,
+              initialValue: _attributes != null && _attributes.charisma != null? _attributes.charisma.toString(): 0,
               decoration: InputDecoration(
                 labelText: 'Carisma (CHA)',
                 labelStyle: TextStyle(
